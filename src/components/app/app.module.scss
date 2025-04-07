@@ -9,13 +9,19 @@
   max-width: 960px;
   background-color: #f1fcff;
   color: #4a4a4a;
+
+  &__main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 232px auto;
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 754px;
+  }
 }
 
-.aviasales-main {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 232px auto;
+.tickets-section {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin: 0 auto;
-  max-width: 754px;
 }

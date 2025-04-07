@@ -2,23 +2,16 @@ import { useState } from 'react'
 
 import classes from './transfer_filter.module.scss'
 
-const transferOptionLabels = [
-  { name: 'all', value: 'Все' },
-  { name: 'without', value: 'Без пересадок' },
-  { name: 'one', value: '1 пересадка' },
-  { name: 'two', value: '2 пересадки' },
-  { name: 'three', value: '3 пересадки' },
+const initialState = [
+  { name: 'all', value: 'Все', checked: false },
+  { name: 'without', value: 'Без пересадок', checked: false },
+  { name: 'one', value: '1 пересадка', checked: false },
+  { name: 'two', value: '2 пересадки', checked: false },
+  { name: 'three', value: '3 пересадки', checked: false },
 ]
 
 export default function TransferFilter() {
-  const [checkedStatus, setCheckedStatus] = useState(
-    transferOptionLabels.map((item) => {
-      return {
-        name: item.name,
-        checked: false,
-      }
-    })
-  )
+  const [checkedStatus, setCheckedStatus] = useState(initialState)
 
   function handleChange(evt) {
     let allInputChecked = null
@@ -37,19 +30,18 @@ export default function TransferFilter() {
     setCheckedStatus(newCheckedStatus)
   }
 
-  const transferOptions = transferOptionLabels.map((label, index) => {
-    const currentInputItem = checkedStatus.find((item) => item.name === label.name)
+  const transferOptions = checkedStatus.map((label, index) => {
     return (
       <li key={index}>
-        <label className={classes['transfer-filter_label']}>
+        <label className={classes['transfer-filter__label']}>
           <input
             name={label.name}
             type="checkbox"
-            className={classes['transfer-filter_checkbox']}
-            checked={currentInputItem.checked}
+            className={classes['transfer-filter__checkbox']}
+            checked={label.checked}
             onChange={handleChange}
           />
-          <span className={classes['transfer-filter_custom-checkbox']}></span>
+          <span className={classes['transfer-filter__custom-checkbox']}></span>
           <span>{label.value}</span>
         </label>
       </li>
@@ -58,8 +50,8 @@ export default function TransferFilter() {
 
   return (
     <form className={classes['transfer-filter']}>
-      <span className={classes['transfer-filter_title']}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
-      <ul className={`${classes['list-reset']} ${classes['transfer-filter_list']}`}>{transferOptions}</ul>
+      <span className={classes['transfer-filter__title']}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
+      <ul className={`${classes['list-reset']} ${classes['transfer-filter__list']}`}>{transferOptions}</ul>
     </form>
   )
 }

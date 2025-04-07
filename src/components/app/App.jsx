@@ -1,19 +1,18 @@
-import { ConfigProvider } from 'antd'
-
 import Header from '../header/Header.jsx'
-import LeftSider from '../left-sider/LeftSider.jsx'
+import LeftSider from '../left_sider/LeftSider.jsx'
+import TicketSorter from '../ticket_sorter/TicketSorter.jsx'
 
-import { token } from './antdGlobalTokens.js'
 import classes from './app.module.scss'
 
 export default function App() {
   return (
     <div className={classes['aviasales']}>
       <Header />
-      <main className={classes['aviasales-main']}>
-        <ConfigProvider theme={{ token: token }}>
-          <LeftSider />
-        </ConfigProvider>
+      <main className={classes['aviasales__main']}>
+        <LeftSider />
+        <section className={classes['tickets-section']}>
+          <TicketSorter />
+        </section>
       </main>
     </div>
   )
