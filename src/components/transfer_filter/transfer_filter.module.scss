@@ -10,7 +10,7 @@
   display: flex;
   gap: 20px;
   width: 232px;
-  padding: 20px;
+  padding: 20px 0;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: #ffffff;
@@ -19,23 +19,25 @@
     box-sizing: border-box;
     flex-direction: column;
     display: flex;
-    gap: 20px;
   }
 
   &__title {
     line-height: 12px;
     letter-spacing: 0.5px;
     font-size: 12px;
+    padding-left: 20px;
   }
 
   &__label {
     display: flex;
     align-items: center;
-    height: 20px;
+    padding-left: 20px;
+    height: 40px;
     line-height: 20px;
 
     &:hover {
       cursor: pointer;
+      background-color: #F1FCFF;
     }
   }
 
