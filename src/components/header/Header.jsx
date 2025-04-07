@@ -1,5 +1,5 @@
 import classes from './header.module.scss'
-import logo from './images/Logo.png'
+import logo from './images/Logo.svg'
 
 export default function Header() {
   return (

@@ -1,0 +1,21 @@
+.transfer-filter {
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+  gap: 20px;
+  width: 232px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.transfer-filter_title {
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  font-size: 12px
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
