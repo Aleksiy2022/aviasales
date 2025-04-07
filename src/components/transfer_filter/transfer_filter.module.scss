@@ -1,3 +1,9 @@
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .transfer-filter {
   box-sizing: border-box;
   flex-direction: column;
@@ -8,14 +14,57 @@
   background-color: #ffffff;
 }
 
+.transfer-filter_list {
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+  gap: 20px;
+}
+
 .transfer-filter_title {
   line-height: 12px;
   letter-spacing: 0.5px;
-  font-size: 12px
+  font-size: 12px;
 }
 
-.checkbox-group {
+.transfer-filter_label {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  height: 20px;
+  line-height: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.transfer-filter_checkbox {
+  display: none;
+}
+
+.transfer-filter_custom-checkbox {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border: solid 1px #9abbce;
+  border-radius: 2px;
+}
+
+.transfer-filter_checkbox:checked + .transfer-filter_custom-checkbox {
+
+  border: solid 1px #2196F3;
+
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 50%;
+    left: 50%;
+    height: 20px;
+    width: 20px;
+    transform: translate(-50%, -50%);
+    background: url('./images/Shape.svg') no-repeat center;
+  }
 }
