@@ -1,3 +1,10 @@
+import Header from '../header/Header.jsx'
+
 export default function App() {
-  return <div>Авиасейлс</div>
+  return (
+    <>
+      <Header />
+      <main></main>
+    </>
+  )
 }
