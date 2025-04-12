@@ -1,36 +1,19 @@
-import { useState } from 'react'
-
 import classes from './transfer_filter.module.scss'
-
-const initialState = [
-  { name: 'all', value: 'Все', checked: false },
-  { name: 'without', value: 'Без пересадок', checked: false },
-  { name: 'one', value: '1 пересадка', checked: false },
-  { name: 'two', value: '2 пересадки', checked: false },
-  { name: 'three', value: '3 пересадки', checked: false },
-]
+import { toggleAllChecked, toggleChecked, selectTransferFilterData } from './transferFilterSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function TransferFilter() {
-  const [checkedStatus, setCheckedStatus] = useState(initialState)
+  const transferFilter = useSelector(selectTransferFilterData)
+  const dispatch = useDispatch()
 
   function handleChange(evt) {
-    let allInputChecked = null
     if (evt.target.name === 'all') {
-      allInputChecked = checkedStatus.find((item) => item.name === 'all').checked
+      dispatch(toggleAllChecked())
     }
-    const newCheckedStatus = checkedStatus.map((item) => {
-      if (evt.target.name === 'all') {
-        return { ...item, checked: !allInputChecked }
-      }
-      if (evt.target.name === item.name) {
-        return { ...item, checked: !item.checked }
-      }
-      return item
-    })
-    setCheckedStatus(newCheckedStatus)
+    dispatch(toggleChecked({ checkboxInputName: evt.target.name }))
   }
 
-  const transferOptions = checkedStatus.map((label, index) => {
+  const transferOptions = transferFilter.map((label, index) => {
     return (
       <li key={index}>
         <label className={classes['transfer-filter__label']}>

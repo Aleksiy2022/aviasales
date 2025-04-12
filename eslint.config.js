@@ -36,6 +36,7 @@ export default [
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       indent: 'off',
+      endOfLine: 'auto',
       'react-hooks/exhaustive-deps': 'off',
       'prettier/prettier': 'error',
       'linebreak-style': ['off'],

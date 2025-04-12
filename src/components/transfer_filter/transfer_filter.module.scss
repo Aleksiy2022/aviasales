@@ -37,7 +37,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #F1FCFF;
+      background-color: #f1fcff;
     }
   }
 
@@ -56,7 +56,7 @@
   }
 
   &__checkbox:checked + &__custom-checkbox {
-    border: solid 1px #2196F3;
+    border: solid 1px #2196f3;
 
     &::after {
       position: absolute;
