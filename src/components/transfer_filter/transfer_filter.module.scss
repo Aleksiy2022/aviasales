@@ -8,14 +8,16 @@
   box-sizing: border-box;
   flex-direction: column;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   width: 232px;
-  padding: 20px 0;
+  height: 252px;
+  padding: 20px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: #ffffff;
 
   &__list {
+    font-weight: 600;
     box-sizing: border-box;
     flex-direction: column;
     display: flex;
@@ -25,15 +27,15 @@
     line-height: 12px;
     letter-spacing: 0.5px;
     font-size: 12px;
-    padding-left: 20px;
+    font-weight: 600;
   }
 
   &__label {
     display: flex;
     align-items: center;
-    padding-left: 20px;
     height: 40px;
     line-height: 20px;
+    font-weight: 400;
 
     &:hover {
       cursor: pointer;

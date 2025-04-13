@@ -1,9 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .list-reset {
   list-style: none;
 }
 
 .aviasales {
-  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
   padding: 40.5px 30px 50px 30px;
   max-width: 960px;

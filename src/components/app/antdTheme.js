@@ -5,6 +5,8 @@ export const theme = {
     lineHeight: 20,
     fontSize: 12,
     colorBorder: '#DFE5EC',
+    fontFamily: 'Open Sans',
+    colorBgSolid: '#2196F3',
   },
   components: {
     Radio: {
