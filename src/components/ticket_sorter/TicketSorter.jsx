@@ -1,28 +1,26 @@
-import { Radio, ConfigProvider } from 'antd'
+import { Radio } from 'antd'
 import classes from './ticket-sorter.module.scss'
-import { theme } from './antdTheme.js'
-
-const options = [
-  { value: 'cheapest', label: 'Самый дешевый' },
-  { value: 'fastest', label: 'Самый быстрый' },
-  { value: 'optimal', label: 'Оптимальный' },
-]
+import { setCurrentSortedValue, selectOptionTicketSorter, selectCurrentSortedValue } from './ticketSorterSlice.js'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function TicketSorter() {
+  const dispatch = useDispatch()
+  const optionsTicketSorter = useSelector(selectOptionTicketSorter)
+  const currentSortedValue = useSelector(selectCurrentSortedValue)
+
   function handleChange(e) {
-    console.log(e.target.value)
+    dispatch(setCurrentSortedValue({ value: e.target.value }))
   }
 
   return (
-    <ConfigProvider theme={theme}>
       <Radio.Group
         block
-        options={options}
+        value={currentSortedValue}
+        options={optionsTicketSorter}
         optionType="button"
         buttonStyle="solid"
         rootClassName={classes['radio-group']}
         onChange={handleChange}
       />
-    </ConfigProvider>
   )
 }
