@@ -13,14 +13,14 @@ export default function TicketSorter() {
   }
 
   return (
-      <Radio.Group
-        block
-        value={currentSortedValue}
-        options={optionsTicketSorter}
-        optionType="button"
-        buttonStyle="solid"
-        rootClassName={classes['radio-group']}
-        onChange={handleChange}
-      />
+    <Radio.Group
+      block
+      value={currentSortedValue}
+      options={optionsTicketSorter}
+      optionType="button"
+      buttonStyle="solid"
+      rootClassName={classes['radio-group']}
+      onChange={handleChange}
+    />
   )
 }

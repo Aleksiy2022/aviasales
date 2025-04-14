@@ -6,7 +6,7 @@ const initialState = {
     { value: 'fastest', label: 'Самый быстрый' },
     { value: 'optimal', label: 'Оптимальный' },
   ],
-  currentSortedValue: 'cheapest'
+  currentSortedValue: 'cheapest',
 }
 
 const ticketSorterSlice = createAppSlice({
@@ -14,14 +14,14 @@ const ticketSorterSlice = createAppSlice({
   initialState,
   reducers: (create) => ({
     setCurrentSortedValue: create.reducer((state, actions) => {
-      const { value } = actions.payload;
-      state.currentSortedValue = value;
-    })
+      const { value } = actions.payload
+      state.currentSortedValue = value
+    }),
   }),
   selectors: {
     selectOptionTicketSorter: (state) => state.options,
     selectCurrentSortedValue: (state) => state.currentSortedValue,
-  }
+  },
 })
 
 export default ticketSorterSlice

@@ -1,12 +1,11 @@
 import classes from './ticket.module.scss'
 
 export default function Ticket() {
-
   return (
     <li className={classes['ticket-wrapper']}>
       <div className={classes['ticket-title']}>
         <span className={classes['ticket-title__price']}>13 400 Р</span>
-        <img src='https://pics.avs.io/110/36/S7.png' alt="логотип авиакомпании" />
+        <img src="https://pics.avs.io/110/36/S7.png" alt="логотип авиакомпании" />
       </div>
       <div className={`${classes['ticket-info']}`}>
         <FlightInfo></FlightInfo>

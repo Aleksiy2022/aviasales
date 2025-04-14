@@ -16,7 +16,7 @@ export default function App() {
           <LeftSider />
           <section className={classes['tickets-section']}>
             <TicketSorter />
-            <TicketList/>
+            <TicketList />
           </section>
         </main>
       </div>
