@@ -8,9 +8,7 @@ import './fonts/fonts.scss'
 import App from './components/app/App.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 )

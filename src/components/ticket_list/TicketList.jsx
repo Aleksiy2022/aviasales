@@ -2,26 +2,20 @@ import Ticket from '../ticket/Ticket.jsx'
 import { Button } from 'antd'
 import classes from './ticket-list.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchTickets, selectTickets, selectIsLoading, selectError } from './ticketListSlice.js'
 import { selectCurrentSortedValue } from '../ticket_sorter/ticketSorterSlice.js'
 import { selectTransferFilterData } from '../transfer_filter/transferFilterSlice.js'
-import { useEffect } from 'react'
+import { useGetSearchIdQuery, useGetTicketsQuery } from '../api/apiSlice.js'
+import { useLoadAllTickets } from '../api/hooks.js'
 
 export default function TicketList() {
-  const dispatch = useDispatch()
-  const sort = useSelector(selectCurrentSortedValue)
-  const filter = useSelector(selectTransferFilterData)
+  const { data: searchIdData = [] } = useGetSearchIdQuery()
+  const searchId = searchIdData.searchId
 
-  const tickets = useSelector(selectTickets)
-  const isLoading = useSelector(selectIsLoading)
-  const error = useSelector(selectError)
+  const { data: ticketsData } = useGetTicketsQuery(searchId, { skip: !searchId })
+  const tickets = ticketsData?.tickets
+  const stop = ticketsData?.stop
 
-  console.log('tickets: ', tickets)
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchTickets())
-    }
-  }, [tickets])
+  useLoadAllTickets(searchId, tickets, stop)
 
   return (
     <>
