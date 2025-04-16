@@ -1,11 +1,13 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import transferFilterSlice from '../transfer_filter/transferFilterSlice.js'
 import ticketSorterSlice from '../ticket_sorter/ticketSorterSlice.js'
+import ticketsButtonSlice from '../tickets_button/ticketsButtonSlice.js'
 import { apiSlice } from '../api/apiSlice.js'
 
 const rootReducer = combineReducers({
   transferFilter: transferFilterSlice.reducer,
   ticketSorter: ticketSorterSlice.reducer,
+  ticketsButton: ticketsButtonSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 })
 

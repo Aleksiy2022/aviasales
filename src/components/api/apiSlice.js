@@ -1,8 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { createEntityAdapter } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
-
-export const ticketsAdapter = createEntityAdapter()
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -19,7 +16,7 @@ export const apiSlice = createApi({
           ...ticket,
         }))
         return {
-          ...ticketsAdapter.setAll(ticketsAdapter.getInitialState(), ticketsWithId),
+          tickets: ticketsWithId,
           stop: response.stop,
         }
       },

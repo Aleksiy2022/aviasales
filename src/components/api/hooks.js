@@ -2,22 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from './apiSlice'
 
-function sortData(data, sortedValue) {
-  switch (sortedValue) {
-    case 'price':
-      return data.ids.sort((a, b) => data.entities[a].price - data.entities[b].price)
-    case 'duration':
-      return data.ids.sort(
-        (a, b) =>
-          (data.entities[a].segments[0].duration +
-            data.entities[a].segments[1].duration) -
-          (data.entities[b].segments[0].duration +
-            data.entities[b].segments[1].duration)
-      )
-  }
-}
-
-export function useLoadAllTickets(searchId, tickets, stop, sortedValue) {
+export function useLoadAllTickets(searchId, ticketsData, stop) {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,9 +20,7 @@ export function useLoadAllTickets(searchId, tickets, stop, sortedValue) {
             isGetTickets = true
             dispatch(
               apiSlice.util.updateQueryData('getTickets', searchId, (draft) => {
-                draft.ids.push(...tickets.ids)
-                draft.entities = { ...draft.entities, ...tickets.entities }
-                draft.ids = sortData(draft, sortedValue)
+                draft.tickets.push(...ticketsData.tickets)
               })
             )
           } else {
@@ -48,5 +31,5 @@ export function useLoadAllTickets(searchId, tickets, stop, sortedValue) {
         }
       }
     }
-  }, [searchId, tickets])
+  }, [searchId, ticketsData])
 }

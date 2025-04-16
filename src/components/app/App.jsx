@@ -2,6 +2,7 @@ import Header from '../header/Header.jsx'
 import LeftSider from '../left_sider/LeftSider.jsx'
 import TicketSorter from '../ticket_sorter/TicketSorter.jsx'
 import TicketList from '../ticket_list/TicketList.jsx'
+import TicketsButton from '../tickets_button/TicketsButton.jsx'
 import { ConfigProvider } from 'antd'
 
 import classes from './app.module.scss'
@@ -17,6 +18,7 @@ export default function App() {
           <section className={classes['tickets-section']}>
             <TicketSorter />
             <TicketList />
+            <TicketsButton/>
           </section>
         </main>
       </div>
