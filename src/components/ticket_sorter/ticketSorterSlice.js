@@ -2,11 +2,11 @@ import { createAppSlice } from '../app/createAppSlice.js'
 
 const initialState = {
   options: [
-    { value: 'cheapest', label: 'Самый дешевый' },
-    { value: 'fastest', label: 'Самый быстрый' },
+    { value: 'price', label: 'Самый дешевый' },
+    { value: 'duration', label: 'Самый быстрый' },
     { value: 'optimal', label: 'Оптимальный' },
   ],
-  currentSortedValue: 'cheapest',
+  currentSortedValue: 'price',
 }
 
 const ticketSorterSlice = createAppSlice({

@@ -2,7 +2,22 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from './apiSlice'
 
-export function useLoadAllTickets(searchId, tickets, stop) {
+function sortData(data, sortedValue) {
+  switch (sortedValue) {
+    case 'price':
+      return data.ids.sort((a, b) => data.entities[a].price - data.entities[b].price)
+    case 'duration':
+      return data.ids.sort(
+        (a, b) =>
+          (data.entities[a].segments[0].duration +
+            data.entities[a].segments[1].duration) -
+          (data.entities[b].segments[0].duration +
+            data.entities[b].segments[1].duration)
+      )
+  }
+}
+
+export function useLoadAllTickets(searchId, tickets, stop, sortedValue) {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -15,15 +30,14 @@ export function useLoadAllTickets(searchId, tickets, stop) {
       let max_retries = 10
       while (!isGetTickets && max_retries > 0) {
         try {
-          const { data, error } = await dispatch(
-            apiSlice.endpoints.getTickets.initiate(searchId, { forceRefetch: true })
-          )
+          const { error } = await dispatch(apiSlice.endpoints.getTickets.initiate(searchId, { forceRefetch: true }))
           if (!error) {
             isGetTickets = true
             dispatch(
               apiSlice.util.updateQueryData('getTickets', searchId, (draft) => {
-                draft.tickets.push(...tickets)
-                draft.stop = data.stop
+                draft.ids.push(...tickets.ids)
+                draft.entities = { ...draft.entities, ...tickets.entities }
+                draft.ids = sortData(draft, sortedValue)
               })
             )
           } else {
