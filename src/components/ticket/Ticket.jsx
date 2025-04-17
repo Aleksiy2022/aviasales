@@ -1,7 +1,8 @@
 import classes from './ticket.module.scss'
 import { formatTime, formatDuration } from './utils.js'
+import { memo } from 'react'
 
-export default function Ticket({ ticket }) {
+export const Ticket = memo (function Ticket({ ticket }) {
   return (
     <>
       <div className={classes['ticket-title']}>
@@ -15,7 +16,7 @@ export default function Ticket({ ticket }) {
       </div>
     </>
   )
-}
+})
 
 function FlightInfo({ segment }) {
   const formattedTime = formatTime(segment.date, segment.duration)
