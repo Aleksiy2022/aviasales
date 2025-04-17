@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { apiSlice } from './apiSlice'
+import { apiSlice } from './apiSlice.js'
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))

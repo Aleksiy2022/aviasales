@@ -1,5 +1,5 @@
 import { Progress } from 'antd'
-import { apiSlice } from '../api/apiSlice.js'
+import { apiSlice } from '../redux/apiSlice.js'
 import { twoColors } from './styleLoadProgress.js'
 import classes from './load-progress.module.scss'
 

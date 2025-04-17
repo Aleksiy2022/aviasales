@@ -13,8 +13,8 @@ export const apiSlice = createApi({
       transformResponse: (response) => {
         const ticketsWithId = response.tickets.map((ticket) => {
           return {
-            id: uuidv4(),
             ...ticket,
+            id: uuidv4(),
           }
         })
         return {

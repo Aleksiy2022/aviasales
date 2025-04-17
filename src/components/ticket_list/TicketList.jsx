@@ -3,12 +3,12 @@ import classes from './ticket-list.module.scss'
 import { useSelector } from 'react-redux'
 import { selectCurrentSortedValue } from '../ticket_sorter/ticketSorterSlice.js'
 import { selectTransferFilterData } from '../transfer_filter/transferFilterSlice.js'
-import { useGetSearchIdQuery, useGetTicketsQuery } from '../api/hooks.js'
+import { useGetSearchIdQuery, useGetTicketsQuery } from '../redux/hooks.js'
 import { selectVisibleCount } from '../tickets_button/ticketsButtonSlice.js'
-import { useLoadAllTickets } from '../api/hooks.js'
+import { useLoadAllTickets } from '../redux/hooks.js'
 import { sortTickets, filterTickets } from './utils.js'
 import { useMemo } from 'react'
-import TicketsButton from "../tickets_button/TicketsButton.jsx";
+import TicketsButton from '../tickets_button/TicketsButton.jsx'
 
 export default function TicketList() {
   const visibleCount = useSelector(selectVisibleCount)
@@ -28,7 +28,7 @@ export default function TicketList() {
 
   const ticketsToShow = sortedTickets.slice(0, visibleCount)
 
-  const message = <div className={classes['message']}>Рейсов, подходящих под заданные фильтры, не найдено</div>
+  const message = <div className={classes['message']}>Рейсов, подходящих под заданные фильтры, не найдено.</div>
 
   const content = (
     <>

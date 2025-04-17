@@ -1,4 +1,4 @@
-import { createAppSlice } from '../app/createAppSlice.js'
+import { createAppSlice } from '../redux/createAppSlice.js'
 
 const initialState = {
   options: [
