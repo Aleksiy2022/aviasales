@@ -18,15 +18,14 @@ export const apiSlice = createApi({
           }
         })
         return {
+          ...response,
           tickets: ticketsWithId,
-          stop: response.stop,
         }
       },
       merge: (currentCache, res) => {
         currentCache.tickets.push(...res.tickets)
+        currentCache.stop = res.stop
       },
     }),
   }),
 })
-
-export const { useGetSearchIdQuery, useGetTicketsQuery } = apiSlice

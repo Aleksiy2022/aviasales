@@ -6,9 +6,8 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-export function useLoadAllTickets(searchId, ticketsData, stop) {
+function useLoadAllTickets(searchId, ticketsData) {
   const dispatch = useDispatch()
-
   const load = useCallback(async () => {
     let retries = 5
     let delay = 500
@@ -23,8 +22,11 @@ export function useLoadAllTickets(searchId, ticketsData, stop) {
   }, [dispatch, searchId])
 
   useEffect(() => {
-    if (searchId && !stop) {
+    if (searchId) {
       load()
     }
-  }, [searchId, stop, ticketsData, load])
+  }, [searchId, ticketsData])
 }
+
+export { useLoadAllTickets }
+export const { useGetSearchIdQuery, useGetTicketsQuery } = apiSlice

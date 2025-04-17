@@ -2,7 +2,7 @@ import classes from './ticket.module.scss'
 import { formatTime, formatDuration } from './utils.js'
 import { memo } from 'react'
 
-export const Ticket = memo (function Ticket({ ticket }) {
+export const Ticket = memo(function Ticket({ ticket }) {
   return (
     <>
       <div className={classes['ticket-title']}>
@@ -21,7 +21,12 @@ export const Ticket = memo (function Ticket({ ticket }) {
 function FlightInfo({ segment }) {
   const formattedTime = formatTime(segment.date, segment.duration)
   const formattedDuration = formatDuration(segment.duration)
-
+  const transfers = {
+    0: 'без пересадок',
+    1: '1 пересадка',
+    2: '2 пересадки',
+    3: '3 пересадки',
+  }
   return (
     <ul className={`${classes['list-reset']} ${classes['ticket-info__list']}`}>
       <li className={classes['ticket-info__item']}>
@@ -35,7 +40,7 @@ function FlightInfo({ segment }) {
         <span className={classes['ticket-info__description']}>{formattedDuration}</span>
       </li>
       <li className={classes['ticket-info__item']}>
-        <span className={classes['ticket-info__title']}>{segment.stops.length} ПЕРЕСАДКИ</span>
+        <span className={classes['ticket-info__title']}>{transfers[segment.stops.length.toString()]}</span>
         <span className={classes['ticket-info__description']}>{segment.stops.join(' ')}</span>
       </li>
     </ul>
