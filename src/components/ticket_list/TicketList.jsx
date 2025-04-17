@@ -1,4 +1,4 @@
-import Ticket from '../ticket/Ticket.jsx'
+import { Ticket } from '../ticket/Ticket.jsx'
 import classes from './ticket-list.module.scss'
 import { useSelector } from 'react-redux'
 import { selectCurrentSortedValue } from '../ticket_sorter/ticketSorterSlice.js'
@@ -22,8 +22,15 @@ export default function TicketList() {
   const stop = ticketsData?.stop
   useLoadAllTickets(searchId, ticketsData, stop)
 
-  const filteredTickets = filterTickets(tickets, transferFilter)
-  const sortedTickets = useMemo(() => sortTickets(filteredTickets, sortedValue), [tickets, sortedValue, transferFilter])
+  const filteredTickets = useMemo(
+    () => filterTickets(tickets, transferFilter),
+    [tickets, transferFilter]
+  )
+  const sortedTickets = useMemo(
+    () => sortTickets(filteredTickets, sortedValue),
+    [filteredTickets, sortedValue]
+  )
+
   const ticketsToShow = sortedTickets.slice(0, visibleCount)
   return (
     <ul className={`${classes['list-reset']} ${classes['ticket-list']}`}>
