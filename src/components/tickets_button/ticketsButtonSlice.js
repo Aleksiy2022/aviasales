@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {visibleCount: 5}
+const initialState = { visibleCount: 5 }
 
 const ticketsButtonSlice = createSlice({
   name: 'ticketsButton',
@@ -12,7 +12,7 @@ const ticketsButtonSlice = createSlice({
   }),
   selectors: {
     selectVisibleCount: (state) => state.visibleCount,
-  }
+  },
 })
 
 export default ticketsButtonSlice

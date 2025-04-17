@@ -18,7 +18,7 @@ export default function App() {
           <section className={classes['tickets-section']}>
             <TicketSorter />
             <TicketList />
-            <TicketsButton/>
+            <TicketsButton />
           </section>
         </main>
       </div>

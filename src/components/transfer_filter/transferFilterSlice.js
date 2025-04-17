@@ -8,31 +8,26 @@ const initialState = [
   { name: 'three', value: '3 пересадки', checked: false },
 ]
 
+function areAllChecked(state) {
+  return state.filter((item) => item.name !== 'all').every((item) => item.checked)
+}
+
 const transferFilterSlice = createAppSlice({
   name: 'transferFilter',
   initialState,
   reducers: (create) => ({
     toggleAllChecked: create.reducer((state) => {
-      const allChecked = state.find((item) => item.name === 'all')
-      if (allChecked) {
-        const newCheckedStatus = !allChecked.checked
-        state.forEach((item) => {
-          item.checked = newCheckedStatus
-        })
-      }
+      const allCheckedNext = !state.find((item) => item.name === 'all').checked
+      state.forEach((item) => {
+        item.checked = allCheckedNext
+      })
     }),
     toggleChecked: create.reducer((state, action) => {
-      const { checkboxInputName } = action.payload
-      const checkboxInput = state.find((item) => item.name === checkboxInputName)
-      if (checkboxInput) {
-        checkboxInput.checked = !checkboxInput.checked
-      }
-      const checkboxInputs = state.filter((item) => item.name !== 'all').every((item) => item.checked)
-
-      const allCheckboxInput = state.find((item) => item.name === 'all')
-      if (allCheckboxInput) {
-        allCheckboxInput.checked = checkboxInputs
-      }
+      const name = action.payload.checkboxInputName
+      const changed = state.find((item) => item.name === name)
+      if (changed) changed.checked = !changed.checked
+      const all = state.find((item) => item.name === 'all')
+      if (all) all.checked = areAllChecked(state)
     }),
   }),
   selectors: {

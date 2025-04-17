@@ -11,14 +11,19 @@ export const apiSlice = createApi({
     getTickets: builder.query({
       query: (searchId) => `/tickets?searchId=${searchId}`,
       transformResponse: (response) => {
-        const ticketsWithId = response.tickets.map((ticket) => ({
-          id: uuidv4(),
-          ...ticket,
-        }))
+        const ticketsWithId = response.tickets.map((ticket) => {
+          return {
+            id: uuidv4(),
+            ...ticket,
+          }
+        })
         return {
           tickets: ticketsWithId,
           stop: response.stop,
         }
+      },
+      merge: (currentCache, res) => {
+        currentCache.tickets.push(...res.tickets)
       },
     }),
   }),

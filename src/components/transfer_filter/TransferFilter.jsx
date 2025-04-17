@@ -6,35 +6,35 @@ export default function TransferFilter() {
   const transferFilter = useSelector(selectTransferFilterData)
   const dispatch = useDispatch()
 
-  function handleChange(evt) {
-    if (evt.target.name === 'all') {
+  const handleChange = (evt) => {
+    const name = evt.target.name
+    if (name === 'all') {
       dispatch(toggleAllChecked())
+    } else {
+      dispatch(toggleChecked({ checkboxInputName: name }))
     }
-    dispatch(toggleChecked({ checkboxInputName: evt.target.name }))
   }
-
-  const transferOptions = transferFilter.map((label, index) => {
-    return (
-      <li key={index}>
-        <label className={classes['transfer-filter__label']}>
-          <input
-            name={label.name}
-            type="checkbox"
-            className={classes['transfer-filter__checkbox']}
-            checked={label.checked}
-            onChange={handleChange}
-          />
-          <span className={classes['transfer-filter__custom-checkbox']}></span>
-          <span>{label.value}</span>
-        </label>
-      </li>
-    )
-  })
 
   return (
     <form className={classes['transfer-filter']}>
       <span className={classes['transfer-filter__title']}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
-      <ul className={`${classes['list-reset']} ${classes['transfer-filter__list']}`}>{transferOptions}</ul>
+      <ul className={`${classes['list-reset']} ${classes['transfer-filter__list']}`}>
+        {transferFilter.map(({ name, value, checked }) => (
+          <li key={name}>
+            <label className={classes['transfer-filter__label']}>
+              <input
+                name={name}
+                type="checkbox"
+                className={classes['transfer-filter__checkbox']}
+                checked={checked}
+                onChange={handleChange}
+              />
+              <span className={classes['transfer-filter__custom-checkbox']}></span>
+              <span>{value}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
     </form>
   )
 }

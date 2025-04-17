@@ -7,11 +7,7 @@ export default function TicketsButton() {
   const dispatch = useDispatch()
 
   return (
-    <Button
-      rootClassName={classes['ticket-list__btn']}
-      variant="solid"
-      onClick={() => dispatch(setVisibleCount())}
-    >
+    <Button rootClassName={classes['ticket-list__btn']} variant="solid" onClick={() => dispatch(setVisibleCount())}>
       Показать еще 5 билетов!
     </Button>
   )

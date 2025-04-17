@@ -7,32 +7,32 @@ import { useGetSearchIdQuery, useGetTicketsQuery } from '../api/apiSlice.js'
 import { selectVisibleCount } from '../tickets_button/ticketsButtonSlice.js'
 import { useLoadAllTickets } from '../api/hooks.js'
 import { sortTickets } from './utils.js'
+import { useMemo } from 'react'
 
 export default function TicketList() {
   const visibleCount = useSelector(selectVisibleCount)
   const sortedValue = useSelector(selectCurrentSortedValue)
-  const { data: searchIdData = [] } = useGetSearchIdQuery()
-  const searchId = searchIdData.searchId
+
+  const { data: searchIdData } = useGetSearchIdQuery()
+  const searchId = searchIdData?.searchId
 
   const { data: ticketsData } = useGetTicketsQuery(searchId, { skip: !searchId })
+  const tickets = ticketsData?.tickets || []
   const stop = ticketsData?.stop
+
   useLoadAllTickets(searchId, ticketsData, stop)
 
-  let ticketsToRender = null
+  const sortedTickets = useMemo(() => sortTickets(tickets, sortedValue), [tickets, sortedValue])
 
-  if (ticketsData) {
-    const sortedTickets = sortTickets(ticketsData.tickets, sortedValue)
-    let ticketsToView = sortedTickets.slice(0, visibleCount)
-    ticketsToRender = ticketsToView.map((ticket) => {
-      return (
+  const ticketsToShow = sortedTickets.slice(0, visibleCount)
+
+  return (
+    <ul className={`${classes['list-reset']} ${classes['ticket-list']}`}>
+      {ticketsToShow.map((ticket) => (
         <li key={ticket.id} className={classes['ticket-wrapper']}>
           <Ticket ticket={ticket} />
         </li>
-      )
-    })
-  }
-
-  return (
-    <ul className={`${classes['list-reset']} ${classes['ticket-list']} }`}>{ticketsToRender}</ul>
+      ))}
+    </ul>
   )
 }

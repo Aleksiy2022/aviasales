@@ -1,35 +1,30 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from './apiSlice'
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export function useLoadAllTickets(searchId, ticketsData, stop) {
   const dispatch = useDispatch()
+
+  const load = useCallback(async () => {
+    let retries = 5
+    let delay = 500
+
+    while (retries > 0) {
+      const { error } = await dispatch(apiSlice.endpoints.getTickets.initiate(searchId, { forceRefetch: true }))
+      if (!error) break
+      retries--
+      await sleep(delay)
+      delay += 500
+    }
+  }, [dispatch, searchId])
 
   useEffect(() => {
     if (searchId && !stop) {
       load()
     }
-
-    async function load() {
-      let isGetTickets = false
-      let max_retries = 10
-      while (!isGetTickets && max_retries > 0) {
-        try {
-          const { error } = await dispatch(apiSlice.endpoints.getTickets.initiate(searchId, { forceRefetch: true }))
-          if (!error) {
-            isGetTickets = true
-            dispatch(
-              apiSlice.util.updateQueryData('getTickets', searchId, (draft) => {
-                draft.tickets.push(...ticketsData.tickets)
-              })
-            )
-          } else {
-            max_retries--
-          }
-        } catch (err) {
-          throw err
-        }
-      }
-    }
-  }, [searchId, ticketsData])
+  }, [searchId, stop, ticketsData, load])
 }
