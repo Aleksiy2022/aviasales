@@ -6,11 +6,12 @@ import { selectTransferFilterData } from '../transfer_filter/transferFilterSlice
 import { useGetSearchIdQuery, useGetTicketsQuery } from '../api/apiSlice.js'
 import { selectVisibleCount } from '../tickets_button/ticketsButtonSlice.js'
 import { useLoadAllTickets } from '../api/hooks.js'
-import { sortTickets } from './utils.js'
+import { sortTickets, filterTickets } from './utils.js'
 import { useMemo } from 'react'
 
 export default function TicketList() {
   const visibleCount = useSelector(selectVisibleCount)
+  const transferFilter = useSelector(selectTransferFilterData)
   const sortedValue = useSelector(selectCurrentSortedValue)
 
   const { data: searchIdData } = useGetSearchIdQuery()
@@ -19,13 +20,11 @@ export default function TicketList() {
   const { data: ticketsData } = useGetTicketsQuery(searchId, { skip: !searchId })
   const tickets = ticketsData?.tickets || []
   const stop = ticketsData?.stop
-
   useLoadAllTickets(searchId, ticketsData, stop)
 
-  const sortedTickets = useMemo(() => sortTickets(tickets, sortedValue), [tickets, sortedValue])
-
+  const filteredTickets = filterTickets(tickets, transferFilter)
+  const sortedTickets = useMemo(() => sortTickets(filteredTickets, sortedValue), [tickets, sortedValue, transferFilter])
   const ticketsToShow = sortedTickets.slice(0, visibleCount)
-
   return (
     <ul className={`${classes['list-reset']} ${classes['ticket-list']}`}>
       {ticketsToShow.map((ticket) => (

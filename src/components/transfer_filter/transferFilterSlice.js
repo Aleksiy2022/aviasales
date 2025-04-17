@@ -2,10 +2,10 @@ import { createAppSlice } from '../app/createAppSlice.js'
 
 const initialState = [
   { name: 'all', value: 'Все', checked: false },
-  { name: 'without', value: 'Без пересадок', checked: false },
-  { name: 'one', value: '1 пересадка', checked: false },
-  { name: 'two', value: '2 пересадки', checked: false },
-  { name: 'three', value: '3 пересадки', checked: false },
+  { name: '0', value: 'Без пересадок', checked: false },
+  { name: '1', value: '1 пересадка', checked: false },
+  { name: '2', value: '2 пересадки', checked: false },
+  { name: '3', value: '3 пересадки', checked: false },
 ]
 
 function areAllChecked(state) {
